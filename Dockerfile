@@ -8,13 +8,11 @@ RUN pip install selenium
 RUN gem install selenium-webdriver 
 RUN mkdir -p /root/selenium_wd_tests
 RUN mkdir -p /root/.mozilla/firefox
-ADD post_plan_smoketest_o8_ruby_webdriver /root/selenium_wd_tests
+ADD post_stam_smoketest_o8_ruby_webdriver /root/selenium_wd_tests
 ADD firefox-default /root/.mozilla/firefox/firefox-default
 ADD skip_cert_error-0.4.4-fx.xpi /root/.mozilla/firefox
 ADD profiles.ini /root/.mozilla/firefox
 ADD xvfb.init /etc/init.d/xvfb
 RUN chmod +x /etc/init.d/xvfb 
 RUN update-rc.d xvfb defaults
-RUN echo 'nameserver 10.4.6.3' >> /etc/resolv.conf
-RUN echo '10.100.0.106  o8wlsnode1.infoplus-ot.ris' >> /etc/hosts
-CMD (service xvfb start; export DISPLAY=:10; ruby /root/selenium_wd_tests/post_plan_smoketest_o8_ruby_webdriver)
+CMD (service xvfb start; export DISPLAY=:10; ruby /root/selenium_wd_tests/post_stam_smoketest_o8_ruby_webdriver)
