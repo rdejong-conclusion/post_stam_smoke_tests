@@ -16,4 +16,4 @@ ADD profiles.ini /root/.mozilla/firefox
 ADD xvfb.init /etc/init.d/xvfb
 RUN chmod +x /etc/init.d/xvfb 
 RUN update-rc.d xvfb defaults
-CMD (service xvfb start; export DISPLAY=:10; ruby /root/selenium_wd_tests/post_stam_smoketest_o8_ruby_webdriver)
+CMD (service xvfb start; export DISPLAY=:10;cd /root/selenium_wd_tests/;ruby post_stam_smoketest_o8_ruby_webdriver)
