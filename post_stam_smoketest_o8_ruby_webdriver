@@ -29,13 +29,13 @@ class PostStamSmoketestO8RubyWebdriver < Test::Unit::TestCase
     @driver.find_element(:css, "input[type=\"submit\"]").click
     @driver.get(@base_url + "?action=procs_status&tonen=all")
     File.open("stam_types.lst").each do|stam_type|
-	test = printf("#{stam_type}")
+	# Cleanup stam_type, newline is present
+	type = stam_type.delete!("\n")
 	body = @driver.find_element(:tag_name => "body").text
-	# puts body.include? "#{test}"
-	puts "Checking start processing #{stam_type}"
-	assert !300.times{ break if (body.include? "Start verwerken stamgegeven type #{test}"); sleep 4}
-	puts "Checking #{stam_type} finished"
-	assert !300.times{ break if (body.include? "#{test} afgerond");sleep 4}
+	puts "Checking whether processing #{type} has started"
+	assert !300.times{ break if (body.include? "Start verwerken stamgegeven type #{type}"); sleep 4}
+	puts "Checking whether processing type #{type} finished"
+	assert !300.times{ break if (body.include? "Verwerken stamgegeven #{type} afgerond");sleep 4}
     end
     @driver.find_element(:link, "Log uit").click
   end
