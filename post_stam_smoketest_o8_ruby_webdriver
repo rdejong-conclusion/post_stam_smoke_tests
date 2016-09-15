@@ -7,6 +7,7 @@ class PostStamSmoketestO8RubyWebdriver < Test::Unit::TestCase
 
   def setup
     Selenium::WebDriver::Firefox.path = "/root/firefox/firefox"
+    @wait = Selenium::WebDriver::Wait.new(:timeout => 600)
     @driver = Selenium::WebDriver.for(:firefox, :profile => "firefox-default")
     @base_url = "https://o8wlsnode1.infoplus-ot.ris:14051/HARM/controller"
     @accept_next_alert = true
@@ -26,9 +27,16 @@ class PostStamSmoketestO8RubyWebdriver < Test::Unit::TestCase
     @driver.find_element(:name, "userpassword").clear
     @driver.find_element(:name, "userpassword").send_keys "harmadmin"
     @driver.find_element(:css, "input[type=\"submit\"]").click
-    @driver.find_element(:link, "Processen").click
-    @driver.find_element(:link, "Voortgang processen").click
-    assert !60.times{ break if (@driver.find_element(:xpath, "//div[@id='Processen']/table/tbody/tr[2]/td[2]").text == "Genereren actuele planning afgerond" rescue false); sleep 10 }
+    @driver.get(@base_url + "?action=procs_status&tonen=all")
+    File.open("stam_types.lst").each do|stam_type|
+	test = printf("#{stam_type}")
+	body = @driver.find_element(:tag_name => "body").text
+	# puts body.include? "#{test}"
+	puts "Checking start processing #{test}"
+	assert !300.times{ break if (body.include? "Start verwerken stamgegeven type #{test}"); sleep 2}
+	puts "Checking #{test} finished"
+	assert !300.times{ break if (body.include? "#{test} afgerond");sleep 2}
+    end
     @driver.find_element(:link, "Log uit").click
   end
   
