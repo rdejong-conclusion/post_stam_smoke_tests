@@ -32,10 +32,10 @@ class PostStamSmoketestO8RubyWebdriver < Test::Unit::TestCase
 	test = printf("#{stam_type}")
 	body = @driver.find_element(:tag_name => "body").text
 	# puts body.include? "#{test}"
-	puts "Checking start processing #{test}"
-	assert !300.times{ break if (body.include? "Start verwerken stamgegeven type #{test}"); sleep 2}
-	puts "Checking #{test} finished"
-	assert !300.times{ break if (body.include? "#{test} afgerond");sleep 2}
+	puts "Checking start processing #{stam_type}"
+	assert !300.times{ break if (body.include? "Start verwerken stamgegeven type #{test}"); sleep 4}
+	puts "Checking #{stam_type} finished"
+	assert !300.times{ break if (body.include? "#{test} afgerond");sleep 4}
     end
     @driver.find_element(:link, "Log uit").click
   end
