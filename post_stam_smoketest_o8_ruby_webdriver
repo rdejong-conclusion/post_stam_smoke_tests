@@ -7,7 +7,6 @@ class PostStamSmoketestO8RubyWebdriver < Test::Unit::TestCase
 
   def setup
     Selenium::WebDriver::Firefox.path = "/root/firefox/firefox"
-    @wait = Selenium::WebDriver::Wait.new(:timeout => 600)
     @driver = Selenium::WebDriver.for(:firefox, :profile => "firefox-default")
     @base_url = "https://o8wlsnode1.infoplus-ot.ris:14051/HARM/controller"
     @accept_next_alert = true
@@ -31,11 +30,10 @@ class PostStamSmoketestO8RubyWebdriver < Test::Unit::TestCase
     File.open("stam_types.lst").each do|stam_type|
 	# Cleanup stam_type, newline is present
 	type = stam_type.delete!("\n")
-	body = @driver.find_element(:tag_name => "body").text
 	puts "Checking whether processing #{type} has started"
-	assert !300.times{ break if (body.include? "Start verwerken stamgegeven type #{type}"); sleep 4}
+	assert !300.times{ break if (@driver.find_element(:tag_name => "body").text.include? "Start verwerken stamgegeven type #{type}"); sleep 4}
 	puts "Checking whether processing type #{type} finished"
-	assert !300.times{ break if (body.include? "Verwerken stamgegeven #{type} afgerond");sleep 4}
+	assert !300.times{ break if (@driver.find_element(:tag_name => "body").text.include? "Verwerken stamgegeven #{type} afgerond");sleep 4}
     end
     @driver.find_element(:link, "Log uit").click
   end
