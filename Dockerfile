@@ -12,6 +12,7 @@ RUN mkdir -p /root/.mozilla/firefox
 ADD stam_types.lst /root/selenium_wd_tests
 ADD firefox-default /root/.mozilla/firefox/firefox-default
 ADD skip_cert_error-0.4.4-fx.xpi /root/.mozilla/firefox
+ADD geckodriver /root/firefox/
 ADD profiles.ini /root/.mozilla/firefox
 ADD xvfb.init /etc/init.d/xvfb
 ADD post_stam_smoketest_ruby_webdriver /root/selenium_wd_tests
