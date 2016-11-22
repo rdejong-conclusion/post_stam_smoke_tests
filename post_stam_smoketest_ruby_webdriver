@@ -11,7 +11,7 @@ describe "PostStamSmoketestRubyWebdriver" do
     target_host = ENV["target_host"]
     $target_user = ENV["target_user"]
     $target_pass = ENV["target_pass"]
-    @driver = Selenium::WebDriver.for(:firefox, :profile => "firefox-default")
+    @driver = Selenium::WebDriver.for :firefox # , :profile => "firefox-default")
     @base_url = "https://#{target_host}:14051/HARM/controller"
     @accept_next_alert = true
     @driver.manage.timeouts.implicit_wait = 600
