@@ -5,7 +5,8 @@ RUN apt-get remove -qq -y firefox
 RUN wget -q https://ftp.mozilla.org/pub/firefox/releases/45.3.0esr/linux-x86_64/en-US/firefox-45.3.0esr.tar.bz2 -O /root/firefox.tar.bz2
 RUN (cd /root/;tar -jxf firefox.tar.bz2)
 RUN pip install selenium
-RUN gem install selenium-webdriver 
+RUN gem install selenium-webdriver
+RUN gem install rspec_junit_formatter
 RUN mkdir -p /root/selenium_wd_tests
 RUN mkdir -p /root/.mozilla/firefox
 ADD stam_types.lst /root/selenium_wd_tests
