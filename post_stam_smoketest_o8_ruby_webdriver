@@ -7,8 +7,11 @@ class PostStamSmoketestO8RubyWebdriver < Test::Unit::TestCase
 
   def setup
     # Selenium::WebDriver::Firefox.path = "/root/firefox/firefox"
-    @driver = Selenium::WebDriver.for :firefox # , :profile => "firefox-default")
-    @base_url = "https://o8wlsnode1.infoplus-ot.ris:14051/HARM/controller"
+    $target_host = ENV["target_host"]
+    $target_user = ENV["target_user"]
+    $target_pass = ENV["target_pass"]
+    @driver = Selenium::WebDriver.for(:firefox, :profile => "firefox-default")
+    @base_url = "https://#{$target_host}:14051/HARM/controller"
     @accept_next_alert = true
     @driver.manage.timeouts.implicit_wait = 600
     @verification_errors = []
@@ -22,9 +25,9 @@ class PostStamSmoketestO8RubyWebdriver < Test::Unit::TestCase
   def test_post_stam_smoketest_o8_ruby_webdriver
     @driver.get(@base_url)
     @driver.find_element(:name, "username").clear
-    @driver.find_element(:name, "username").send_keys "harmadmin"
+    @driver.find_element(:name, "username").send_keys $target_user
     @driver.find_element(:name, "userpassword").clear
-    @driver.find_element(:name, "userpassword").send_keys "harmadmin"
+    @driver.find_element(:name, "userpassword").send_keys $target_pass
     @driver.find_element(:css, "input[type=\"submit\"]").click
     # @driver.get(@base_url + "?action=procs_status&tonen=all")
     File.open("stam_types.lst").each do|stam_type|
