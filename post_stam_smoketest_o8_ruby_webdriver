@@ -6,7 +6,7 @@ require "test/unit"
 class PostStamSmoketestO8RubyWebdriver < Test::Unit::TestCase
 
   def setup
-    Selenium::WebDriver::Firefox.path = "/root/firefox/firefox"
+    # Selenium::WebDriver::Firefox.path = "/root/firefox/firefox"
     @driver = Selenium::WebDriver.for(:firefox, :profile => "firefox-default")
     @base_url = "https://o8wlsnode1.infoplus-ot.ris:14051/HARM/controller"
     @accept_next_alert = true
