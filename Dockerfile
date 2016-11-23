@@ -14,6 +14,7 @@ ADD firefox-default /root/.mozilla/firefox/firefox-default
 ADD skip_cert_error-0.4.4-fx.xpi /root/.mozilla/firefox
 ADD profiles.ini /root/.mozilla/firefox
 ADD xvfb.init /etc/init.d/xvfb
+ADD geckodriver /root/firefox/
 RUN chmod +x /etc/init.d/xvfb 
 RUN update-rc.d xvfb defaults
 CMD (service xvfb start; export DISPLAY=:10;cd /root/selenium_wd_tests/;ruby post_stam_smoketest_o8_ruby_webdriver)
