@@ -41,10 +41,10 @@ describe "PostStamSmoketestRubyWebdriver" do
       # Cleanup stam_type, newline is present
       type = stam_type.delete!("\n")
       puts "Checking whether processing #{type} has started"
-      # @driver.get(@base_url + "?action=procs_status&tonen=all")
+      @driver.get(@base_url + "?action=procs_status&tonen=all")
       expect(@driver.find_element(:tag_name => "body").text).to include("Start verwerken stamgegeven type #{type}")
       puts "Checking whether processing type #{type} finished"
-      # @driver.get(@base_url + "?action=procs_status&tonen=all")
+      @driver.get(@base_url + "?action=procs_status&tonen=all")
       expect(@driver.find_element(:tag_name => "body").text).to include("Verwerken stamgegeven #{type} afgerond")
     end
     @driver.find_element(:link, "Log uit").click
