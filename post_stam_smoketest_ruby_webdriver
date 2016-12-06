@@ -32,6 +32,7 @@ describe "PostStamSmoketestRubyWebdriver" do
     puts "Checking target_host #{$target_host}"
     @driver.get(@base_url)
     @driver.find_element(:name, "username").clear
+    puts "Logging in"
     @driver.find_element(:name, "username").send_keys $target_user
     @driver.find_element(:name, "userpassword").clear
     @driver.find_element(:name, "userpassword").send_keys $target_pass
@@ -40,10 +41,10 @@ describe "PostStamSmoketestRubyWebdriver" do
       # Cleanup stam_type, newline is present
       type = stam_type.delete!("\n")
       puts "Checking whether processing #{type} has started"
-      @driver.get(@base_url + "?action=procs_status&tonen=all")
+      # @driver.get(@base_url + "?action=procs_status&tonen=all")
       expect(@driver.find_element(:tag_name => "body").text).to include("Start verwerken stamgegeven type #{type}")
       puts "Checking whether processing type #{type} finished"
-      @driver.get(@base_url + "?action=procs_status&tonen=all")
+      # @driver.get(@base_url + "?action=procs_status&tonen=all")
       expect(@driver.find_element(:tag_name => "body").text).to include("Verwerken stamgegeven #{type} afgerond")
     end
     @driver.find_element(:link, "Log uit").click
