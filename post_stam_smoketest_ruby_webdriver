@@ -1,6 +1,7 @@
 require "json"
 require "selenium-webdriver"
 require "rspec"
+require "rspec/retry"
 require "rspec_junit_formatter"
 include RSpec::Expectations
 
@@ -21,7 +22,7 @@ describe "PostStamSmoketestRubyWebdriver" do
         c.syntax = [:should, :expect]
       end
       config.verbose_retry = true
-      config.default_retry_count =5
+      config.default_retry_count = 5
       config.exceptions_to_retry = [Net::ReadTimeout]
     end
   end
