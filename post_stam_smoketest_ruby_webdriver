@@ -20,6 +20,9 @@ describe "PostStamSmoketestRubyWebdriver" do
       config.expect_with :rspec do |c|
         c.syntax = [:should, :expect]
       end
+      config.verbose_retry = true
+      config.default_retry_count =5
+      config.exceptions_to_retry = [Net::ReadTimeout]
     end
   end
   
