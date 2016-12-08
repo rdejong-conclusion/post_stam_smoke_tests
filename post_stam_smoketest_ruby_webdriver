@@ -1,8 +1,8 @@
-require "json"
-require "selenium-webdriver"
-require "rspec"
-require "rspec/retry"
-require "rspec_junit_formatter"
+require 'json'
+require 'selenium-webdriver'
+require 'rspec'
+require 'rspec/retry'
+require 'rspec_junit_formatter'
 include RSpec::Expectations
 
 describe "PostStamSmoketestRubyWebdriver" do
