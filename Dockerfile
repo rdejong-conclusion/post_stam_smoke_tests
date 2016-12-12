@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:latest
 RUN (apt-get -qq update && apt-get upgrade -qq -y)
 RUN apt-get install -qq -y firefox xvfb python-pip ruby ruby-dev ruby-rspec wget firefox
 RUN apt-get remove -qq -y firefox
