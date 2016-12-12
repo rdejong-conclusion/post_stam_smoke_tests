@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 RUN (apt-get -qq update && apt-get upgrade -qq -y)
-RUN apt-get install -qq -y firefox xvfb python-pip ruby ruby-dev ruby-rspec wget firefox
+RUN (apt-get install -qq -y firefox xvfb python-pip ruby ruby-dev ruby-rspec wget firefox >> dev/null)
 RUN apt-get remove -qq -y firefox
 RUN wget -q https://ftp.mozilla.org/pub/firefox/releases/45.3.0esr/linux-x86_64/en-US/firefox-45.3.0esr.tar.bz2 -O /root/firefox.tar.bz2
 RUN (cd /root/;tar -jxf firefox.tar.bz2)
