@@ -41,7 +41,7 @@ describe "PostStamSmoketestRubyWebdriver" do
     @driver.find_element(:name, "userpassword").clear
     @driver.find_element(:name, "userpassword").send_keys $target_pass
     @driver.find_element(:css, "input[type=\"submit\"]").click
-    # @driver.find_element(:link, "Processen").click
+    @driver.find_element(:link, "Processen").click
     @driver.get(@base_url + '?action=procs_index')
     File.open("stam_types.lst").each do|stam_type|
       # Cleanup stam_type, newline is present
