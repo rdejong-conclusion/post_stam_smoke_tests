@@ -3,6 +3,7 @@ require 'selenium-webdriver'
 require 'rspec'
 require 'rspec/retry'
 require 'rspec_junit_formatter'
+require 'rspec/wait'
 include RSpec::Expectations
 
 describe "PostStamSmoketestRubyWebdriver" do
@@ -23,6 +24,7 @@ describe "PostStamSmoketestRubyWebdriver" do
       end
       config.verbose_retry = true
       config.default_retry_count = 5
+      config.wait_timeout = 600 # seconds
       config.exceptions_to_retry = [Net::ReadTimeout]
     end
   end
@@ -42,16 +44,16 @@ describe "PostStamSmoketestRubyWebdriver" do
     @driver.find_element(:name, "userpassword").send_keys $target_pass
     @driver.find_element(:css, "input[type=\"submit\"]").click
     @driver.find_element(:link, "Processen").click
-    @driver.get(@base_url + '?action=procs_index')
+    # @driver.get(@base_url + '?action=procs_index')
     File.open("stam_types.lst").each do|stam_type|
       # Cleanup stam_type, newline is present
       type = stam_type.delete!("\n")
       puts "Checking whether processing #{type} has started"
       @driver.get(@base_url + "?action=procs_status&tonen=all")
-      expect(@driver.find_element(:tag_name => "body").text).to include("Start verwerken stamgegeven type #{type}")
+      wait_for(@driver.find_element(:tag_name => "body").text).to include("Start verwerken stamgegeven type #{type}")
       puts "Checking whether processing type #{type} finished"
       @driver.get(@base_url + "?action=procs_status&tonen=all")
-      expect(@driver.find_element(:tag_name => "body").text).to include("Verwerken stamgegeven #{type} afgerond")
+      wait_for(@driver.find_element(:tag_name => "body").text).to include("Verwerken stamgegeven #{type} afgerond")
     end
     @driver.find_element(:link, "Log uit").click
   end
