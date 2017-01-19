@@ -23,10 +23,11 @@ describe "PostStamSmoketestRubyWebdriver" do
         c.syntax = [:should, :expect]
       end
       config.verbose_retry = true
-      config.default_retry_count = 5
+      config.default_retry_count = 120
       config.wait_timeout = 600 # seconds
       config.wait_delay = 5 # seconds
-      config.exceptions_to_retry = [Net::ReadTimeout]
+      config.display_try_failure_messages = true
+      # config.exceptions_to_retry = [Net::ReadTimeout]
     end
   end
   
@@ -55,10 +56,10 @@ describe "PostStamSmoketestRubyWebdriver" do
       body = @driver.find_element(:tag_name => "body").text
       puts "#{body}"
       @driver.get(@base_url + "?action=procs_status&tonen=all")
-      wait_for(@driver.find_element(:tag_name => "body").text).to include("Start verwerken stamgegeven type #{type}")
+      wait_until(@driver.find_element(:tag_name => "body").text).to include("Start verwerken stamgegeven type #{type}")
       puts "Checking whether processing type #{type} finished"
       @driver.get(@base_url + "?action=procs_status&tonen=all")
-      wait_for(@driver.find_element(:tag_name => "body").text).to include("Verwerken stamgegeven #{type} afgerond")
+      wait_until(@driver.find_element(:tag_name => "body").text).to include("Verwerken stamgegeven #{type} afgerond")
     end
     @driver.find_element(:link, "Log uit").click
   end
