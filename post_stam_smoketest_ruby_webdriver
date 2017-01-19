@@ -56,10 +56,10 @@ describe "PostStamSmoketestRubyWebdriver" do
       body = @driver.find_element(:tag_name => "body").text
       puts "#{body}"
       @driver.get(@base_url + "?action=procs_status&tonen=all")
-      wait_until(@driver.find_element(:tag_name => "body").text).to include("Start verwerken stamgegeven type #{type}")
+      wait_for(@driver.find_element(:tag_name => "body").text).to include("Start verwerken stamgegeven type #{type}")
       puts "Checking whether processing type #{type} finished"
       @driver.get(@base_url + "?action=procs_status&tonen=all")
-      wait_until(@driver.find_element(:tag_name => "body").text).to include("Verwerken stamgegeven #{type} afgerond")
+      wait_for(@driver.find_element(:tag_name => "body").text).to include("Verwerken stamgegeven #{type} afgerond")
     end
     @driver.find_element(:link, "Log uit").click
   end
