@@ -22,7 +22,7 @@ describe "PostStamSmoketestRubyWebdriver" do
       config.expect_with :rspec do |c|
         c.syntax = [:should, :expect]
       end
-      config.verbose_retry = true
+      config.verbose_retry = false
       config.default_retry_count = 120 # try getting the page after failing this many times
       config.wait_timeout = 30 # number of seconds to wait until fail, the harm page has a self refresh of 20 secs
       config.wait_delay = 5 # seconds, functioning?
