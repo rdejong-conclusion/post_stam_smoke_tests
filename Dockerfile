@@ -6,7 +6,8 @@ RUN wget -q https://ftp.mozilla.org/pub/firefox/releases/45.3.0esr/linux-x86_64/
 RUN (cd /root/;tar -jxf firefox.tar.bz2)
 RUN (pip install selenium >> /dev/null)
 RUN (gem install selenium-webdriver -v 2.53.4 >> /dev/null)
-RUN (gem install rspec_junit_formatter rspec-retry rspec-wait >> /dev/null)
+RUN (gem install rspec-retry -v 0.4.6 >> /dev/null)
+RUN (gem install rspec_junit_formatter rspec-wait >> /dev/null)
 RUN mkdir -p /root/selenium_wd_tests
 RUN mkdir -p /root/.mozilla/firefox
 ADD stam_types.lst /root/selenium_wd_tests
