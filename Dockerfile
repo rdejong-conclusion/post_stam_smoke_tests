@@ -20,4 +20,4 @@ RUN chmod +x /etc/init.d/xvfb
 RUN chkconfig xvfb on
 RUN mkdir -p /rresults
 RUN (dbus-uuidgen > /etc/machine-id)
-CMD (/etc/init.d/xvfb start;export DISPLAY=":10" PATH="$PATH:/root/firefox";cd /root/selenium_wd_tests/;target_host=${target_host} target_user=${target_user} target_pass=${target_pass} rspec post_stam_smoketest_ruby_webdriver) --format RspecJunitFormatter --out /results/results.xml
+CMD (/etc/init.d/xvfb start;export DISPLAY=":10" PATH="$PATH:/root/firefox";cd /root/selenium_wd_tests/;target_host=${target_host} target_user=${target_user} target_pass=${target_pass} rspec post_stam_smoketest_ruby_webdriver --format RspecJunitFormatter --out /results/results.xml)
